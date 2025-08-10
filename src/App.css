@@ -1,0 +1,380 @@
+/* Marvel Tetris CSS - Add this to your index.css file */
+
+/* Global reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  background-color: #000000 !important;
+  color: #ffffff;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  background-color: #000000;
+}
+
+/* Marvel Tetris specific styles */
+.marvel-tetris-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000000 0%, #1a0a0a 50%, #000000 100%);
+  background-attachment: fixed;
+}
+
+.game-title {
+  background: linear-gradient(45deg, #ff0000, #0066ff, #ff6600, #cc0099);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  letter-spacing: 3px;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Game board container - Enhanced version */
+.game-board, .tetris-board {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(20, 40px);
+  gap: 2px;
+  background: linear-gradient(135deg, #111111 0%, #0a0a0a 100%);
+  border: 3px solid #444444;
+  border-radius: 12px;
+  padding: 12px;
+  width: max-content;
+  margin: 20px auto;
+  box-shadow: 
+    0 0 30px rgba(0, 150, 255, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.game-board::before, .tetris-board::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, #ff0000, #0066ff, #00ff66, #ffaa00);
+  border-radius: 15px;
+  z-index: -1;
+  opacity: 0.3;
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Game cells - Enhanced version */
+.game-cell, .tetris-cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+  user-select: none;
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #333333;
+}
+
+/* Empty cell styling */
+.game-cell-empty, .tetris-cell-empty {
+  background: 
+    linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+  border: 1px solid #333333;
+}
+
+/* Filled cell styling */
+.game-cell-filled, .tetris-cell-filled {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.game-cell-filled::before, .tetris-cell-filled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Falling piece animation */
+.game-cell-falling, .tetris-cell-falling {
+  animation: pulse 0.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Hero-specific cell styles */
+.hero-thor {
+  background: radial-gradient(circle, #4A4A00, #2A2A00);
+  box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.hero-ironman {
+  background: radial-gradient(circle, #4A1A00, #2A1000);
+  box-shadow: inset 0 0 10px rgba(255, 69, 0, 0.3);
+}
+
+.hero-captain {
+  background: radial-gradient(circle, #001A4A, #00102A);
+  box-shadow: inset 0 0 10px rgba(65, 105, 225, 0.3);
+}
+
+.hero-widow {
+  background: radial-gradient(circle, #4A1A3A, #2A101A);
+  box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.3);
+}
+
+.hero-hulk {
+  background: radial-gradient(circle, #1A4A1A, #102A10);
+  box-shadow: inset 0 0 10px rgba(50, 205, 50, 0.3);
+}
+
+/* Buttons */
+.game-button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.game-button:hover::before {
+  left: 100%;
+}
+
+.button-drop {
+  background: linear-gradient(135deg, #0066cc, #004499);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+}
+
+.button-drop:hover {
+  background: linear-gradient(135deg, #0077dd, #0055aa);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+}
+
+.button-rotate {
+  background: linear-gradient(135deg, #00cc66, #009944);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 204, 102, 0.3);
+}
+
+.button-rotate:hover {
+  background: linear-gradient(135deg, #00dd77, #00aa55);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 204, 102, 0.4);
+}
+
+.button-reset {
+  background: linear-gradient(135deg, #cc6600, #994400);
+  color: white;
+  box-shadow: 0 4px 15px rgba(204, 102, 0, 0.3);
+}
+
+.button-reset:hover {
+  background: linear-gradient(135deg, #dd7700, #aa5500);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(204, 102, 0, 0.4);
+}
+
+.button-disabled {
+  background: linear-gradient(135deg, #666666, #444444) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Side panels */
+.side-panel {
+  background: linear-gradient(135deg, #222222, #1a1a1a);
+  border: 2px solid #444444;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.side-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0066ff, transparent);
+}
+
+.next-piece-container {
+  background: linear-gradient(135deg, #111111, #0a0a0a);
+  border: 1px solid #555555;
+  border-radius: 8px;
+  padding: 15px;
+  min-height: 80px;
+}
+
+/* Score display */
+.score-display {
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.6);
+}
+
+.score-number {
+  color: #ffcc00;
+  text-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+  animation: scoreGlow 2s ease-in-out infinite;
+}
+
+@keyframes scoreGlow {
+  0%, 100% { text-shadow: 0 0 15px rgba(255, 204, 0, 0.8); }
+  50% { text-shadow: 0 0 25px rgba(255, 204, 0, 1); }
+}
+
+/* Game over overlay */
+.game-over-panel {
+  background: linear-gradient(135deg, #660000, #440000);
+  border: 2px solid #cc0000;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  animation: gameOverPulse 1s ease-in-out infinite;
+}
+
+@keyframes gameOverPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(204, 0, 0, 0.5); }
+  50% { box-shadow: 0 0 30px rgba(204, 0, 0, 0.8); }
+}
+
+.game-over-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6666;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+  margin-bottom: 15px;
+}
+
+/* Controls guide */
+.controls-guide {
+  line-height: 1.8;
+  color: #cccccc;
+}
+
+.controls-guide div {
+  margin: 5px 0;
+  padding: 3px 0;
+}
+
+.controls-tip {
+  border-top: 1px solid #444444;
+  padding-top: 15px;
+  margin-top: 15px;
+  font-size: 12px;
+  color: #999999;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .marvel-tetris-container {
+    padding: 10px;
+  }
+  
+  .game-title {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  .tetris-board {
+    padding: 8px;
+  }
+  
+  .side-panel {
+    width: 160px;
+    padding: 15px;
+  }
+  
+  .game-button {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+.tetris-cell, .game-button, .side-panel {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Focus styles for accessibility */
+.game-button:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar for any overflow content */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444444;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666666;
+}
