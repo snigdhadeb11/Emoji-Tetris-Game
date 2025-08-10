@@ -185,26 +185,3 @@ We welcome contributions! Here's how you can help:
 6. Push: `git push origin feature/amazing-feature`
 7. Submit a Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Marvel Entertainment** - For creating these iconic superheroes
-- **Tetris** - For the timeless puzzle game mechanics
-- **React Community** - For the amazing framework and ecosystem
-- **Contributors** - Everyone who has helped improve this project
-
-## 📞 Support
-
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/marvel-tetris/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/marvel-tetris/discussions)
-- 📧 **Email**: your.email@example.com
-
----
-
-<div align="center">
-  <p>Made with ❤️ for Marvel fans and Tetris lovers</p>
-  <p><strong>⚡ Assemble Your Heroes! 🦸‍♂️</strong></p>
-</div>
